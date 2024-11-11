@@ -1,4 +1,4 @@
-tls_client
+tls-client
 requests
 config_parser
 colorama
@@ -9,3 +9,4 @@ fake_useragent
 httpx
 asyncio
 tqdm~=4.66.5
+selenium

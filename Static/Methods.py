@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 try:
     import requests,webbrowser,tempfile
     from colorama import Fore,Style
@@ -8,11 +9,15 @@ try:
     from bs4 import BeautifulSoup
     import hashlib
     import subprocess
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
     import zipfile
     from tqdm import tqdm
     import shutil
 except:
-    os.system(f"pip install -r requirements.txt")
+    print("Installing Libraries...")
+    os.system("pip install -r requirements.txt")
+    os.system("python3 main.py")
 class StaticMethods:
     @staticmethod
     def get_proxies():
@@ -60,30 +65,9 @@ class StaticMethods:
         elif not "https" in user and not "@" in user:
             return f"https://www.tiktok.com/@{user}"
     @staticmethod
-    def get_userID(user):
-        from bs4 import BeautifulSoup
-        import json
-        response = requests.get(StaticMethods._solve_name(user))
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, "html.parser")
-            script_tag = soup.find("script", {"id": "__UNIVERSAL_DATA_FOR_REHYDRATION__"})
-            if script_tag:
-                data = json.loads(script_tag.string)
-                try:
-                    return data["__DEFAULT_SCOPE__"]["webapp.user-detail"]["userInfo"]["user"]["id"]
-                except KeyError:
-                    return "Invalid Profile. Check Username/Url"
-            else:
-                raise Exception("No JSON Found.")
-        else:
-            raise Exception("Internal Error")
-    @staticmethod
     def get_userData(user,infotype):
-        from bs4 import BeautifulSoup
-        import json
-        response = requests.get(StaticMethods._solve_name(user))
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, "html.parser")
+        def data(a,infotype):
+            soup = BeautifulSoup(a, "html.parser")
             script_tag = soup.find("script", {"id": "__UNIVERSAL_DATA_FOR_REHYDRATION__"})
             if script_tag:
                 data = json.loads(script_tag.string)
@@ -91,8 +75,29 @@ class StaticMethods:
                     return data["__DEFAULT_SCOPE__"]["webapp.user-detail"]["userInfo"]["user"][infotype]
                 except KeyError:
                     return "Invalid Profile. Check Username/Url"
+        from bs4 import BeautifulSoup
+        import json
+        response = requests.get(StaticMethods._solve_name(user))
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, "html.parser")
+            script_tag = soup.find("script", {"id": "__UNIVERSAL_DATA_FOR_REHYDRATION__"})
+            if script_tag:
+                return data(response.text,infotype)
             else:
-                raise Exception("No JSON Found.")
+                os.system("cls") if os.name == 'nt' else os.system("clear")
+                print(f"{StaticValues.WAITING}Gathering User Info With Selenium.. (this will take longer than normal)")
+                options = webdriver.ChromeOptions()
+                options.add_argument("--headless")
+                options.add_argument("--no-sandbox")
+                options.add_argument("--enable-unsafe-swiftshader")
+                driver = webdriver.Chrome(options=options)
+                driver.get(StaticMethods._solve_name(user))
+                time.sleep(3)
+
+                page_source = driver.page_source
+                driver.quit()
+                os.system("cls") if os.name == 'nt' else os.system("clear")
+                return data(page_source,infotype)        
         else:
             raise Exception("Internal Error")
     @staticmethod

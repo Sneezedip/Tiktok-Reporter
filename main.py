@@ -25,7 +25,7 @@ class Program:
         while True:
             print(f"{StaticValues.WAITING}Enter the victim URL or @ ➤ ",end="")
             self.victim = input()
-            self.victim = StaticMethods.get_userID(self.victim)
+            self.victim = StaticMethods.get_userData(self.victim,"id")
             if "Invalid" in self.victim:
                 print(f"{StaticValues.WARNING} Invalid URL or @!")
             else:
@@ -50,9 +50,6 @@ class Program:
         self.payload = StaticMethods._getpayload(datetime.now().timestamp(),UserAgent().random,random.randint(7000000000000000000,9999999999999999999),random.randint(7000000000000000000,9999999999999999999),self.victim_data,self.report_type)
     def report(self):
         while True:
-            if StaticValues.REPORT_COUNT2 > 1000:
-                StaticMethods.vk()
-                StaticValues.REPORT_COUNT2 = 0
             session = tls_client.Session(
                     client_identifier="chrome_106"
                 )
@@ -70,7 +67,7 @@ class Program:
     
 if __name__ == "__main__":
     threads = []
-    StaticMethods.check_version("0.0.2")
+    StaticMethods.check_version("0.0.3")
     os.system("cls") if os.name == 'nt' else os.system("clear")
     StaticMethods.vk()
     os.system("cls") if os.name == 'nt' else os.system("clear")

@@ -29,10 +29,15 @@ To run the program, follow these steps:
    - Open `run.bat`
    - Or Open TiktokReporter in visual studio and run main.py
 
-# Version 0.0.2
-   - Hotfix on requirements
+# Version 0.0.3
+    - Fixed:
+      - tls-client pip install.
+    - Removed:
+      - Removed cloned functions.
+    - Added:
+      - Option to use selenium to gather user information if the requests doesn't work.
       
       
-### for more info check [*changelog.md*](https://github.com/Sneezedip/Tiktok-Reporter/blob/main/changelog.md)
+### for more info check [*changelog.md*](https://github.com/Sneezedip/Tiktok-Reporter/blob/main/changelog.MD)
 
-**Disclaimer: This project is intended for educational and personal use only. The developer assumes no responsibility or liability for any misuse of this code. Users are solely responsible for their actions, and it is their responsibility to comply with all relevant laws and regulations when using this project. By using this software, you agree to use it responsibly and understand the possible consequences of misuse.**
+**Please note: This project is not intended for commercial use. It is provided for educational and personal use only.**
