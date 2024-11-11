@@ -33,6 +33,6 @@ To run the program, follow these steps:
    - Hotfix on requirements
       
       
-### for more info check [*changelog.md*](https://github.com/Sneezedip/Tiktok-Reporter/blob/main/changelog.MD)
+### for more info check [*changelog.md*](https://github.com/Sneezedip/Tiktok-Reporter/blob/main/changelog.md)
 
 **Disclaimer: This project is intended for educational and personal use only. The developer assumes no responsibility or liability for any misuse of this code. Users are solely responsible for their actions, and it is their responsibility to comply with all relevant laws and regulations when using this project. By using this software, you agree to use it responsibly and understand the possible consequences of misuse.**
