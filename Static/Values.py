@@ -30,6 +30,7 @@ class StaticValues:
     }
 
     REPORT_COUNT = 0
+    REPORT_COUNT2 = 0
     TOTAL_REQUESTS = 0
 
     COOLDOWN = False
